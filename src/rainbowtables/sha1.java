@@ -14,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class sha1 {
     
-static String toSha1(String input) throws NoSuchAlgorithmException {
+static String toSha1(String input) throws NoSuchAlgorithmException { //funkcja hashująca SHA1
         MessageDigest mDigest = MessageDigest.getInstance("SHA1");
         byte[] result = mDigest.digest(input.getBytes());
         StringBuilder sb = new StringBuilder();

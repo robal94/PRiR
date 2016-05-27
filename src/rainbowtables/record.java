@@ -17,7 +17,7 @@ public class record {
     private final String string;
     private String hash;
     
-    public record(String string){
+    public record(String string){//konstruktor potrzebujący hasło, automatycznie wylicza dla niego sha1
         this.string = string;
         try {
             this.hash = sha1.toSha1(string);

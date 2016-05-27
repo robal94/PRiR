@@ -18,19 +18,29 @@ import static rainbowtables.sha1.toSha1;
 public class RainbowTables {
     private static GeneratorStringow generatorStringow;
     private static ArrayList<record> list;
-    private static int size = 1000;
+    private static int size = 1000; //domyślnie tablica wynikowa = 1000
     
-    private static void nextRound(){
+    private static void firstRound(){ //pierwsza runda - tworzenie haseł i pierwszych hashów
+          for(int i = 0; i < size; i++){
+            list.add(new record(generatorStringow.generateString()));
+        }
+       
+    }
+    
+    private static void nextRound(){//każda kolejna runda - redukcja, hash, zapis
         for(int i = 0; i < size; i++){
             try {
-                String x = generatorStringow.redukcja(list.get(i).getHash());
-                list.get(i).setHash(toSha1(x));
-                System.out.println(x + "-> "+ list.get(i).getHash());
-
+                list.get(i).setHash(toSha1(generatorStringow.redukcja(list.get(i).getHash())));
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(RainbowTables.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    private static void print(){//metoda wyświetlająca tablicę wynikową
+        for(int i = 0; i < size; i++){
+            System.out.println(list.get(i).getString() + " " + list.get(i).getHash());
+    }
     }
     
     /**
@@ -39,7 +49,7 @@ public class RainbowTables {
     public static void main(String[] args) {
         boolean bezParametrow = true;
         RainbowTables.generatorStringow = new GeneratorStringow();
-        for (String s : args){
+        for (String s : args){ //pobranie parametrów = a-małe litery, A - duże litery, 0 - cyfry, 1-10 - długość hasła, >10 - wielkość tablicy wynikowej
             switch (s) {
                 case "a":
                     generatorStringow.setFlagSmallAlpha();
@@ -64,21 +74,15 @@ public class RainbowTables {
             }
          }
         RainbowTables.list = new ArrayList<>(size);
-        if(bezParametrow){
+        if(bezParametrow){//jak nie podano alfabetu - domyślnie same cyfry
             generatorStringow.setFlagNumerics();
         }
-        for(int i = 0; i < size; i++){
-            list.add(new record(generatorStringow.generateString()));
-           // System.out.println(list.get(i).getString()+" -> "+list.get(i).getHash());
-        }
+        RainbowTables.firstRound();//runda inicjująca
+        RainbowTables.nextRound();//runda kończąca
         RainbowTables.nextRound();
-        System.out.println("***");
         RainbowTables.nextRound();
-        System.out.println("***");
         RainbowTables.nextRound();
-        System.out.println("***");
-        RainbowTables.nextRound();
-        System.out.println("***");
+        RainbowTables.print();
 
     }
 }

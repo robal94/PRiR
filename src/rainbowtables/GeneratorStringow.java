@@ -12,12 +12,12 @@ import java.util.Random;
  * @author Tobiasz
  */
 public class GeneratorStringow {
-    private boolean smallAlpha, bigAlpha, numeric;
-    private final char[] smallAlphaList, bigAlphaList, numericList;
-    private int size; 
-    private final Random generator;
+    private boolean smallAlpha, bigAlpha, numeric; //flagi dotyczące alfabetu haseł
+    private final char[] smallAlphaList, bigAlphaList, numericList; //alfabety haseł
+    private int size;  //rozmiar haseł
+    private final Random generator; //generator liczb losowych
     
-    public GeneratorStringow(){
+    public GeneratorStringow(){ //konstruktor
         this.generator = new Random();
         this.smallAlphaList = new char[]{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
                                             'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w', 'x', 'y', 'z'};
@@ -27,10 +27,10 @@ public class GeneratorStringow {
         this.numeric = false;
         this.bigAlpha = false;
         this.smallAlpha = false;
-        this.size = 5;
+        this.size = 5; //rozmiar hasła - domyślnie 5
     }
     
-    private char generateChar(){
+    private char generateChar(){ //generuje pojedyńczy znak zgodnie z ustawieniami urzytkownika
         
        while(true){
        int x = generator.nextInt(3);
@@ -51,7 +51,7 @@ public class GeneratorStringow {
         }
    }
     
-    public String generateString(){
+    public String generateString(){//generuje hasło początkowe - losowe
         String wynik = "";
         for(int i = 0; i < this.size; i++){
             wynik = wynik+generateChar();
@@ -59,7 +59,7 @@ public class GeneratorStringow {
         return wynik;
     }
 
-    private boolean ok(char x){
+    private boolean ok(char x){//sprawdza czy podany znak jest akceptowalny przez wybrany przez użytkownika alfabet
         if(smallAlpha){
             for(int i = 0; i < 25; i++){
                 if(smallAlphaList[i] == x){
@@ -95,7 +95,7 @@ public class GeneratorStringow {
             }
             
         }
-        return hash;
+        return wynik;
     }
     
     void setFlagSmallAlpha() {
