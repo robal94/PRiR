@@ -37,11 +37,11 @@ public class GeneratorStringow {
        switch(x){
            case 0:
                if(smallAlpha){
-                    return smallAlphaList[generator.nextInt(26)];
+                    return smallAlphaList[generator.nextInt(25)];
                }
            case 1:
                if(bigAlpha){
-                    return bigAlphaList[generator.nextInt(26)];
+                    return bigAlphaList[generator.nextInt(25)];
                }
            case 2:
                if(numeric){
@@ -59,9 +59,43 @@ public class GeneratorStringow {
         return wynik;
     }
 
-    public String generateString(String hash){
+    private boolean ok(char x){
+        if(smallAlpha){
+            for(int i = 0; i < 25; i++){
+                if(smallAlphaList[i] == x){
+                    return true;
+                }
+            }
+        }
+        if(bigAlpha){
+            for(int i = 0; i < 25; i++){
+                if(bigAlphaList[i] == x){
+                    return true;
+                }
+            }
+        }
+        if(numeric){
+            for(int i = 0; i < 10; i++){
+                if(numericList[i] == x){
+                    return true;
+                }
+            }
+        }
+        return false;
         
-        return null;
+    }
+    
+    public String redukcja(String hash){ //funkcja redukująca
+        char[] string = hash.toCharArray();
+        String wynik = "";
+        for(int i = 0; i < this.size; i++){
+            int j = i % 40;
+            if(ok(string[i])){
+                wynik = wynik + string[i];
+            }
+            
+        }
+        return hash;
     }
     
     void setFlagSmallAlpha() {
