@@ -5,6 +5,10 @@
  */
 package rainbowtables;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Tobiasz
@@ -15,7 +19,11 @@ public class record {
     
     public record(String string){
         this.string = string;
-        this.hash = null;
+        try {
+            this.hash = sha1.toSha1(string);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(record.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public String getString(){

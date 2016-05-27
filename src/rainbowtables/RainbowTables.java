@@ -48,7 +48,7 @@ public class RainbowTables {
         }
         for(int i = 0; i < 1000; i++){
             list.add(new record(generatorStringow.generateString()));
-            System.out.println(list.get(i).getString());
+            System.out.println(list.get(i).getString()+" "+list.get(i).getHash());
         }
         
         }
