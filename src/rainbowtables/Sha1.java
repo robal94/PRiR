@@ -12,9 +12,9 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author Tobiasz
  */
-public class sha1 {
+public class Sha1 {
     
-static String toSha1(String input) throws NoSuchAlgorithmException { //funkcja hashująca SHA1
+public static String toSha1(String input) throws NoSuchAlgorithmException { //funkcja hashująca SHA1
         MessageDigest mDigest = MessageDigest.getInstance("SHA1");
         byte[] result = mDigest.digest(input.getBytes());
         StringBuilder sb = new StringBuilder();
