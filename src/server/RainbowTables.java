@@ -43,9 +43,9 @@ public class RainbowTables implements RainbowRemoteInterface {
     }
 
     //przeprowadzenie pierwszej rundy i przekazanie polowy wynikow do dalszych oblieczen do klienta
-    public ArrayList getFirstRound() throws RemoteException {
+    public ArrayList<Record> getFirstRound() throws RemoteException {
         RainbowTables.firstRound();
-        ArrayList<Record> half = null;
+        ArrayList<Record> half = new ArrayList<Record>();
         for (int i = 0; i < size / 2; i++) {
             half.add(list.get(i));
         }
@@ -119,6 +119,7 @@ public class RainbowTables implements RainbowRemoteInterface {
         try{
             String name = "RainbowRemoteInterface";
             RainbowRemoteInterface halfRainbowGenerator = new RainbowTables();
+            System.setProperty("java.rmi.server.hostname", "192.168.0.102");
             RainbowRemoteInterface stub = (RainbowRemoteInterface) UnicastRemoteObject.exportObject(halfRainbowGenerator, 0);
             Registry registry = LocateRegistry.getRegistry();
             registry.rebind(name, stub);

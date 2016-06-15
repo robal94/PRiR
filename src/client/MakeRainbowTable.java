@@ -39,8 +39,9 @@ public class MakeRainbowTable {
             System.setSecurityManager(new SecurityManager());
         }
         try{
+            String host = args.length > 0 ? args[0] : "192.168.0.102";
             String name = "RainbowRemoteInterface";
-            Registry registry = LocateRegistry.getRegistry(args[0]);
+            Registry registry = LocateRegistry.getRegistry(host);
             RainbowRemoteInterface remoteObject = (RainbowRemoteInterface) registry.lookup(name);
             
             remoteObject.init(args);

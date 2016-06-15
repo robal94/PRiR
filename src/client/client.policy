@@ -1,0 +1,3 @@
+grant codeBase "file:/home/s1admin/RainbowClient/" {
+    permission java.security.AllPermission;
+}

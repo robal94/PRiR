@@ -1,0 +1,3 @@
+grant codeBase "file:/home/przemek/NetBeansProjects/PRiR/src" {
+    permission java.security.AllPermission;
+};
