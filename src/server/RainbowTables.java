@@ -58,7 +58,7 @@ public class RainbowTables implements RainbowRemoteInterface {
         }
     }
     
-    public void init(String[] args) throws RemoteException{
+    public void init(String[] args) throws RemoteException{//inicjacja parametrów i zmiennych
         boolean bezParametrow = true;
         RainbowTables.generatorStringow = new GeneratorStringow();
         for (String s : args) { //pobranie parametrów = a-małe litery, A - duże litery, 0 - cyfry, 1-10 - długość hasła, >10 - wielkość tablicy wynikowej
@@ -117,6 +117,7 @@ public class RainbowTables implements RainbowRemoteInterface {
             System.setSecurityManager(new SecurityManager());
         }
         try{
+            //przygotowanie zdalnego obiektu gotowego do komunikacji
             String name = "RainbowRemoteInterface";
             RainbowRemoteInterface halfRainbowGenerator = new RainbowTables();
             System.setProperty("java.rmi.server.hostname", "192.168.0.102");
@@ -128,8 +129,5 @@ public class RainbowTables implements RainbowRemoteInterface {
             System.err.println("RemoteTables exception:");
             e.printStackTrace();
         }
-        
-      
-
     }
 }

@@ -39,11 +39,13 @@ public class MakeRainbowTable {
             System.setSecurityManager(new SecurityManager());
         }
         try{
+            //inicjacja zdalnego obiektu
             String host = args.length > 0 ? args[0] : "192.168.0.102";
             String name = "RainbowRemoteInterface";
             Registry registry = LocateRegistry.getRegistry(host);
             RainbowRemoteInterface remoteObject = (RainbowRemoteInterface) registry.lookup(name);
             
+            //przeprowadzanie obliczeń
             remoteObject.init(args);
             list = remoteObject.getFirstRound();
             remoteObject.generate();
@@ -53,10 +55,6 @@ public class MakeRainbowTable {
             nextRound();
             remoteObject.receive(list);
             remoteObject.printTable();
-            
-            
-            
-            
             
         }catch(Exception e){
             System.err.println("MakeRainbowTable exception:");
