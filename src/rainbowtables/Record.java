@@ -5,6 +5,7 @@
  */
 package rainbowtables;
 
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,27 +14,32 @@ import java.util.logging.Logger;
  *
  * @author Tobiasz
  */
-public class record {
+public class Record implements Serializable {
+
+    static final long serialVersionUID = 2566672299262750173L;
+
     private final String string;
     private String hash;
-    
-    public record(String string){//konstruktor potrzebujący hasło, automatycznie wylicza dla niego sha1
+
+    public Record(String string) {//konstruktor potrzebujący hasło, automatycznie wylicza dla niego sha1
         this.string = string;
         try {
-            this.hash = sha1.toSha1(string);
+            this.hash = Sha1.toSha1(string);
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(record.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Record.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public String getString(){
+
+    public String getString() {
         return string;
     }
-    public String getHash(){
+
+    public String getHash() {
         return hash;
     }
-    public void setHash(String hash){
+
+    public void setHash(String hash) {
         this.hash = hash;
     }
-    
+
 }
